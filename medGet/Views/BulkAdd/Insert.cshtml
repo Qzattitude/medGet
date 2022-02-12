@@ -1,0 +1,37 @@
+﻿@model medGet.Models.MedicineDetails
+
+@{
+    ViewData["Title"] = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+
+    <h4>Update Medicine Data</h4>
+    <hr />
+</div>
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-5">
+        <form asp-action="Insert" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            
+            <div class="form-group">
+                 <label class="form-label mt-4">Upload CSV File Only!</label>
+                 <input class="form-control" accept=".csv" name="Path" id="Path">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Insert" class="btn btn-primary btn-lg w-100" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,5 +1,7 @@
 using medGet.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using medGet.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
-    
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthDbContextConnection"))
+);    
     var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +28,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
