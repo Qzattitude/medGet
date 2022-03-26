@@ -4,7 +4,7 @@
 
 namespace medGet.Migrations
 {
-    public partial class MedicineDataset : Migration
+    public partial class UpdateTableForMedicine : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,7 @@ namespace medGet.Migrations
                 name: "MedicineDetails",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Generic = table.Column<string>(type: "nvarchar(max)", nullable: false),

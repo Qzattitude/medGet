@@ -3,18 +3,24 @@
     ViewData["Title"] = "Add Medicine Data";
 }
 
-<div class="text-center">
-    <div>
-    <h4 scope="col">Update Medicine Data</h4>
-    <a type="button" asp-controller="BulkAdd" asp-action="Insert" class="btn btn-info text-white">Update Medicine Data</a>
+    <div class="text-center">
+        <div>
+        <h4 scope="col">Update Medicine Data</h4>
+        <a type="button" class="btn btn-info text-white" href="">Update Medicine Data</a>
+        </div>
+        <hr />
     </div>
-    <hr />
-</div>
+
+    <form class="d-flex" asp-controller="BulkAdd" asp-action="Index" method="post">
+            <input class="form-control me-sm-2" type="text" name="text" id="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" value="Index">Search</button>
+    </form>
+<hr />
 
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+                @*<th scope="col">Id</th>*@
                 <th scope="col">Company</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Generic</th>
@@ -32,7 +38,7 @@
                 if (item.UsedFor.Equals("R"))
                 {
                     <tr class="table-secondary">
-                        <th scope="row">@item.Id</th>
+                        @*<th scope="row">@item.Id</th>*@
                         <td>@item.CompanyName</td>
                         <td>@item.BrandName</td>
                         <td>@item.Generic</td>
@@ -46,7 +52,7 @@
                 if (item.UsedFor.Equals("Human"))
                 {
                     <tr class="table-info">
-                        <th scope="row">@item.Id</th>
+                        @*<th scope="row">@item.Id</th>*@
                         <td>@item.CompanyName</td>
                         <td>@item.BrandName</td>
                         <td>@item.Generic</td>
@@ -60,7 +66,7 @@
                 if (item.UsedFor.Equals("Veterinary"))
                 {
                     <tr class="table-warning">
-                        <th scope="row">@item.Id</th>
+                        @*<th scope="row">@item.Id</th>*@
                         <td>@item.CompanyName</td>
                         <td>@item.BrandName</td>
                         <td>@item.Generic</td>
@@ -74,4 +80,5 @@
             }
         </tbody>
     </table>
+
 

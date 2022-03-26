@@ -1,19 +1,16 @@
-﻿using medGet.Database;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using medGet.Database;
 using medGet.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Microsoft.VisualBasic.FileIO;
-using CsvHelper;
-using System.IO;
 using System.Globalization;
-using System.Linq;
-using CsvHelper.Configuration;
 
 namespace medGet.Controllers
 {
     public class BulkAddController : Controller
     {
         private readonly ApplicationDbContext _db;
+
         public BulkAddController(ApplicationDbContext db)
         {
             _db = db;
@@ -21,8 +18,28 @@ namespace medGet.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<MedicineDetails> objList = _db.MedicineDetails;
+            IEnumerable<MedicineDetails> objList = _db.MedicineDetails
+                .Take(10);
             return View(objList);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string text)
+        {
+            if (!String.IsNullOrEmpty(text))
+            {
+                IEnumerable<MedicineDetails> objList = _db.MedicineDetails
+                    .Where(p => (p.BrandName.Contains(text)
+                            || p.CompanyName.Contains(text)
+                            || p.DAR.Contains(text)
+                            || p.Generic.Contains(text))
+                            && !p.Price.Contains("0"));
+                return View(objList);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult Insert()
@@ -34,23 +51,26 @@ namespace medGet.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult Insert(String Path)
         {
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HeaderValidated = null,
+                MissingFieldFound = null
+            };
             using (var streamReader = new StreamReader(Path))
             {
-                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
-                {
-                    csvReader.Context.RegisterClassMap<MedicineDetailsMap>();
-                    var records = csvReader.GetRecords<dynamic>().ToList();
-                    
-
-                }
+                using var csvReader = new CsvReader(streamReader, config);
+                csvReader.Context.RegisterClassMap<MedicineDetailsMap>();
+                var records = csvReader.GetRecords<MedicineDetails>().ToList();
+                _db.MedicineDetails.AddRange(records);
+                _db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
+
         public class MedicineDetailsMap : ClassMap<MedicineDetails>
         {
             public MedicineDetailsMap()
             {
-                Map(m => m.Id).Name("id");
                 Map(m => m.CompanyName).Name("name").ToString();
                 Map(m => m.BrandName).Name("brand").ToString();
                 Map(m => m.Generic).Name("generic").ToString();
