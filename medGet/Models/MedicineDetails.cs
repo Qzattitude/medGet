@@ -11,6 +11,5 @@
         public string Price { get; set; }
         public string UsedFor { get; set; }
         public string DAR { get; set; }
-
     }
 }

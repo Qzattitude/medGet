@@ -2,16 +2,17 @@
 using CsvHelper.Configuration;
 using medGet.Database;
 using medGet.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 
 namespace medGet.Controllers
 {
-    public class BulkAddController : Controller
+    public class SearchController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public BulkAddController(ApplicationDbContext db)
+        public SearchController(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -24,6 +25,7 @@ namespace medGet.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(string text)
         {
             if (!String.IsNullOrEmpty(text))
@@ -51,19 +53,19 @@ namespace medGet.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult Insert(String Path)
         {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HeaderValidated = null,
-                MissingFieldFound = null
-            };
-            using (var streamReader = new StreamReader(Path))
-            {
-                using var csvReader = new CsvReader(streamReader, config);
-                csvReader.Context.RegisterClassMap<MedicineDetailsMap>();
-                var records = csvReader.GetRecords<MedicineDetails>().ToList();
-                _db.MedicineDetails.AddRange(records);
-                _db.SaveChanges();
-            }
+            //var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            //{
+            //    HeaderValidated = null,
+            //    MissingFieldFound = null
+            //};
+            //using (var streamReader = new StreamReader(Path))
+            //{
+            //    using var csvReader = new CsvReader(streamReader, config);
+            //    csvReader.Context.RegisterClassMap<MedicineDetailsMap>();
+            //    var records = csvReader.GetRecords<MedicineDetails>().ToList();
+            //    _db.MedicineDetails.AddRange(records);
+            //    _db.SaveChanges();
+            //}
             return RedirectToAction("Index");
         }
 

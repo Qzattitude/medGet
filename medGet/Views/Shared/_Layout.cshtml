@@ -22,11 +22,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BulkAdd" asp-action="Index">Add Medicine</a>
-                        </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Search" asp-action="Index">Search Medicine</a>
+                        </li>*@
+                        <partial name="_SearchPartial"/>
                     </ul>
+                    <partial name="_LoginPartial"/>
                 </div>
+                
             </div>
         </nav>
     </header>
