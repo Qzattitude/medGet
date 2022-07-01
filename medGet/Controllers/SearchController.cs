@@ -10,9 +10,9 @@ namespace medGet.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly AppDbContext _db;
 
-        public SearchController(ApplicationDbContext db)
+        public SearchController(AppDbContext db)
         {
             _db = db;
         }
