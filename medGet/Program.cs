@@ -1,4 +1,6 @@
-using medGet.Database;
+using medGet.Controllers.DbController;
+using medGet.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +12,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,13 +27,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseRouting();
 //app.MapRazorPages(); 
 
-//27th March 2022
 
 app.MapControllerRoute(
     name: "default",

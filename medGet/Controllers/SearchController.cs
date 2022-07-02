@@ -1,6 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using medGet.Database;
+using medGet.Controllers.DbController;
 using medGet.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +40,7 @@ namespace medGet.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Privacy", "Home");
             }
         }
 
@@ -50,7 +50,6 @@ namespace medGet.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult Insert(String Path)
         {
             //var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -58,6 +57,7 @@ namespace medGet.Controllers
             //    HeaderValidated = null,
             //    MissingFieldFound = null
             //};
+
             //using (var streamReader = new StreamReader(Path))
             //{
             //    using var csvReader = new CsvReader(streamReader, config);
@@ -66,6 +66,39 @@ namespace medGet.Controllers
             //    _db.MedicineDetails.AddRange(records);
             //    _db.SaveChanges();
             //}
+
+            
+            //IEnumerable<MedicineDetails> medicineDetails = _db.MedicineDetails.ToList();
+            //foreach (var element in medicineDetails)
+            //{
+            //    var PriceVariationCount = element.Price.Split(", ").Count();
+            //    if (PriceVariationCount == 1)
+            //    {
+            //        PriceVariation priceVariation = new ()
+            //        {
+            //            Id = Guid.NewGuid(),
+            //            DAR = element.DAR,
+            //            Price = float.Parse(element.Price)
+            //        };
+            //        _db.Add(priceVariation);
+                    
+            //    }
+            //    else
+            //    {
+            //        List<string> SegregatedPrice = element.Price.Split(", ").ToList();
+            //        foreach(var segreg in SegregatedPrice)
+            //        {
+            //            PriceVariation priceVariation = new ()
+            //            {
+            //                Id = Guid.NewGuid(),
+            //                DAR = element.DAR,
+            //                Price = float.Parse(segreg)
+            //            };
+            //            _db.Add(priceVariation);
+            //        }
+            //    }
+            //}
+            //_db.SaveChanges();
             return RedirectToAction("Index");
         }
 
