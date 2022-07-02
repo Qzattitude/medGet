@@ -2,6 +2,7 @@
 using CsvHelper.Configuration;
 using medGet.Controllers.DbController;
 using medGet.Models;
+using medGet.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,33 +18,32 @@ namespace medGet.Controllers
         {
             _db = db;
         }
-
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<MedicineDetails> objList = await _db.MedicineDetails.ToListAsync();
+            SearchViewModel model = new SearchViewModel();
+            model.MedicineDetails = await _db.PriceVariation.Take(10).ToListAsync();
             //Change it with Paging
-            return View(objList.Take(10));
+            return View(model);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string text)
-        {
-            if (!String.IsNullOrEmpty(text))
+        public async Task<IActionResult> Index(SearchViewModel model)
+        { 
+            if (ModelState.IsValid && !model.Text.Equals(null))
             {
-                IEnumerable<MedicineDetails> objList = await _db.MedicineDetails
-                    .Where(p => (p.BrandName.Contains(text)
-                            || p.CompanyName.Contains(text)
-                            || p.DAR.Contains(text)
-                            || p.Generic.Contains(text))
-                            && !p.Price.Contains("0")).ToListAsync();
-                return View(objList);
+                model.MedicineDetails = await _db.PriceVariation.Where(p => (p.BrandName.Contains(model.Text)
+                            || p.CompanyName.Contains(model.Text)
+                            || p.DAR.Contains(model.Text)
+                            || p.GenericElements.Contains(model.Text))
+                            && !p.Price.Equals(0)).ToListAsync();
+                return View(model);
             }
-            else
-            {
-                return RedirectToAction("Privacy", "Home");
-            }
+            return RedirectToAction("Index","Search");
         }
+
+
 
         public IActionResult Insert()
         {
@@ -133,6 +133,11 @@ namespace medGet.Controllers
                 Map(m => m.UsedFor).Name("usedfor").ToString();
                 Map(m => m.DAR).Name("dar").ToString();
             }
+        }
+        [HttpPost]
+        public IActionResult Product(Guid Id)
+        {
+            return View();
         }
     }
 }

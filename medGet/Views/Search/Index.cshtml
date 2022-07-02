@@ -1,4 +1,6 @@
-﻿@model IEnumerable<medGet.Models.MedicineDetails>
+﻿@using medGet.ViewModels
+@*@model IEnumerable<medGet.Models.MedicineDetails>*@
+@model SearchViewModel
 @{
     ViewData["Title"] = "Add Medicine Data";
 }
@@ -33,17 +35,17 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.MedicineDetails)
             {
                 if (item.UsedFor.Equals("R"))
                 {
-                    <tr class="table-secondary">
+                    <tr class="table-secondary" >
                         @*<th scope="row">@item.Id</th>*@
                         <td>@item.CompanyName</td>
-                        <td>@item.BrandName</td>
-                        <td>@item.Generic</td>
-                        <td>@item.Strength</td>
-                        <td>@item.Dosages</td>
+                        <td>@Html.ActionLink(@item.BrandName, "Product", "Search", new { @Id = item.Id }, null)</td>
+                        <td>@item.GenericElements</td>
+                        <td>@item.ElementsQuantity</td>
+                        <td>@item.MedicineType</td>
                         <td>@item.Price</td>
                         <td>@item.UsedFor</td>
                         <td>@item.DAR</td>
@@ -54,10 +56,10 @@
                     <tr class="table-info">
                         @*<th scope="row">@item.Id</th>*@
                         <td>@item.CompanyName</td>
-                        <td>@item.BrandName</td>
-                        <td>@item.Generic</td>
-                        <td>@item.Strength</td>
-                        <td>@item.Dosages</td>
+                        <td>@Html.ActionLink(@item.BrandName, "Product", "Search", new { @Id = item.Id }, null)</td>
+                        <td>@item.GenericElements</td>
+                        <td>@item.ElementsQuantity</td>
+                        <td>@item.MedicineType</td>
                         <td>@item.Price</td>
                         <td>@item.UsedFor</td>
                         <td>@item.DAR</td>
@@ -65,13 +67,13 @@
                 }
                 if (item.UsedFor.Equals("Veterinary"))
                 {
-                    <tr class="table-warning">
+                    <tr class="table-warning" >
                         @*<th scope="row">@item.Id</th>*@
                         <td>@item.CompanyName</td>
-                        <td>@item.BrandName</td>
-                        <td>@item.Generic</td>
-                        <td>@item.Strength</td>
-                        <td>@item.Dosages</td>
+                        <td>@Html.ActionLink(@item.BrandName, "Product", "Search", new { @Id = item.Id }, null)</td>
+                        <td>@item.GenericElements</td>
+                        <td>@item.ElementsQuantity</td>
+                        <td>@item.MedicineType</td>
                         <td>@item.Price</td>
                         <td>@item.UsedFor</td>
                         <td>@item.DAR</td>
