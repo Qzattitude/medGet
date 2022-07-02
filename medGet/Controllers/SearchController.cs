@@ -18,7 +18,7 @@ namespace medGet.Controllers
             _db = db;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<MedicineDetails> objList = await _db.MedicineDetails.ToListAsync();
             //Change it with Paging
@@ -51,10 +51,10 @@ namespace medGet.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertAsync(String Path)
+        public async Task<IActionResult> Insert(String Path)
         {
             var ExistingData = await _db.MedicineDetails.ToListAsync();
-            if ( ExistingData.Count == 0)
+            if (ExistingData.Count != 0)
             {
                 return RedirectToAction("Index");
             }
@@ -84,7 +84,13 @@ namespace medGet.Controllers
                     {
                         Id = Guid.NewGuid(),
                         DAR = element.DAR,
-                        Price = float.Parse(element.Price)
+                        Price = float.Parse(element.Price),
+                        BrandName = element.BrandName,
+                        CompanyName = element.CompanyName,
+                        GenericElements = element.Generic,
+                        ElementsQuantity = element.Strength,
+                        MedicineType = element.Dosages,
+                        UsedFor = element.UsedFor
                     };
                     await _db.AddAsync(priceVariation);
 
@@ -98,7 +104,13 @@ namespace medGet.Controllers
                         {
                             Id = Guid.NewGuid(),
                             DAR = element.DAR,
-                            Price = float.Parse(segreg)
+                            Price = float.Parse(segreg),
+                            BrandName = element.BrandName,
+                            CompanyName = element.CompanyName,
+                            GenericElements = element.Generic,
+                            ElementsQuantity = element.Strength,
+                            MedicineType = element.Dosages,
+                            UsedFor = element.UsedFor
                         };
                         await _db.AddAsync(priceVariation);
                     }

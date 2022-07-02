@@ -4,10 +4,52 @@
 
 namespace medGet.Migrations
 {
-    public partial class UpdatingUserTable : Migration
+    public partial class MedicineByPrice : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "BrandName",
+                table: "PriceVariation",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "CompanyName",
+                table: "PriceVariation",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "ElementsQuantity",
+                table: "PriceVariation",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "GenericElements",
+                table: "PriceVariation",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "MedicineType",
+                table: "PriceVariation",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "UsedFor",
+                table: "PriceVariation",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
             migrationBuilder.AlterColumn<string>(
                 name: "Contact",
                 table: "AspNetUsers",
@@ -23,32 +65,56 @@ namespace medGet.Migrations
                 keyColumn: "Id",
                 keyValue: "25E46705-C687-4728-9A08-F81C0EAAFBE7",
                 column: "ConcurrencyStamp",
-                value: "4f003904-6a02-4a41-bfd8-2c550ebe8e0e");
+                value: "91ea3f54-2a25-47c9-a849-631c80439559");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "49F70FB3-4F6E-4168-A912-A38658510A9F",
                 column: "ConcurrencyStamp",
-                value: "c9164498-269a-47e3-96f7-2cc3dab20133");
+                value: "02b3de67-edac-46a5-a9ab-4e3e37fdb287");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83",
                 column: "ConcurrencyStamp",
-                value: "dbbf42cd-e99a-4567-8f35-e3a88652275d");
+                value: "b38db271-6d47-401f-a273-d9c9e2e3680b");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "49F70FB3-4F6E-4168-A912-A38658510A9F",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash" },
-                values: new object[] { "a74a3bb8-6893-410f-b584-98d55d8a1aea", "AQAAAAEAACcQAAAAEMuXq3x7qHEUHww0Gpolxun9jLPeHdrz2Y027cz/LcNenzy48VQknWfiIUHvf5zQHA==" });
+                values: new object[] { "21ed2ce0-78be-437d-bd12-fbab4d46f92e", "AQAAAAEAACcQAAAAEDR6nyy/1JWr3h13jDYXA32VAWYajHBzPRNEAUX5KdOhZu27asv6XlJRMxFdEJXkbA==" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "BrandName",
+                table: "PriceVariation");
+
+            migrationBuilder.DropColumn(
+                name: "CompanyName",
+                table: "PriceVariation");
+
+            migrationBuilder.DropColumn(
+                name: "ElementsQuantity",
+                table: "PriceVariation");
+
+            migrationBuilder.DropColumn(
+                name: "GenericElements",
+                table: "PriceVariation");
+
+            migrationBuilder.DropColumn(
+                name: "MedicineType",
+                table: "PriceVariation");
+
+            migrationBuilder.DropColumn(
+                name: "UsedFor",
+                table: "PriceVariation");
+
             migrationBuilder.AlterColumn<string>(
                 name: "Contact",
                 table: "AspNetUsers",

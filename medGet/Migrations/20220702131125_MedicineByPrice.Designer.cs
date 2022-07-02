@@ -12,8 +12,8 @@ using medGet.Controllers.DbController;
 namespace medGet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220702103817_UpdatingUserTable")]
-    partial class UpdatingUserTable
+    [Migration("20220702131125_MedicineByPrice")]
+    partial class MedicineByPrice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,13 +113,13 @@ namespace medGet.Migrations
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a74a3bb8-6893-410f-b584-98d55d8a1aea",
+                            ConcurrencyStamp = "21ed2ce0-78be-437d-bd12-fbab4d46f92e",
                             Email = "mukit@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "mukit@gmail.com",
                             NormalizedUserName = "ADMIN@2022",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMuXq3x7qHEUHww0Gpolxun9jLPeHdrz2Y027cz/LcNenzy48VQknWfiIUHvf5zQHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDR6nyy/1JWr3h13jDYXA32VAWYajHBzPRNEAUX5KdOhZu27asv6XlJRMxFdEJXkbA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -176,12 +176,36 @@ namespace medGet.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DAR")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ElementsQuantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GenericElements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicineType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
+
+                    b.Property<string>("UsedFor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -218,21 +242,21 @@ namespace medGet.Migrations
                         new
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
-                            ConcurrencyStamp = "c9164498-269a-47e3-96f7-2cc3dab20133",
+                            ConcurrencyStamp = "02b3de67-edac-46a5-a9ab-4e3e37fdb287",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83",
-                            ConcurrencyStamp = "dbbf42cd-e99a-4567-8f35-e3a88652275d",
+                            ConcurrencyStamp = "b38db271-6d47-401f-a273-d9c9e2e3680b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "25E46705-C687-4728-9A08-F81C0EAAFBE7",
-                            ConcurrencyStamp = "4f003904-6a02-4a41-bfd8-2c550ebe8e0e",
+                            ConcurrencyStamp = "91ea3f54-2a25-47c9-a849-631c80439559",
                             Name = "Provider",
                             NormalizedName = "PROVIDER"
                         });

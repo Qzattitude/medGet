@@ -13,6 +13,6 @@ namespace medGet.ViewModels
         public IDictionary<string, string> Generic_Quantity { get; set; }
         public string UsedFor { get; set; }
         public string DAR { get; set; }
-        public PriceVariation PriceVariation { get; set; }
+        public IList<PriceVariation> PriceVariation { get; set; }
     }
 }
