@@ -12,8 +12,8 @@ using medGet.Controllers.DbController;
 namespace medGet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220702015257_PriceSeg")]
-    partial class PriceSeg
+    [Migration("20220702220827_ProductView")]
+    partial class ProductView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,7 @@ namespace medGet.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("Age")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -40,7 +41,8 @@ namespace medGet.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contact")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -111,13 +113,13 @@ namespace medGet.Migrations
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed5b96b7-e8e4-4f44-8a39-1d545d53e7eb",
+                            ConcurrencyStamp = "27a5d840-91c8-4f52-b925-81120c0ad587",
                             Email = "mukit@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "mukit@gmail.com",
                             NormalizedUserName = "ADMIN@2022",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFtZAIVbZyhYLih4NtDjQWtL+uu36gHImqTlNYkAWemsXJXNeLAVUu4kFv4K4sfJ6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK1PJllEAmf+XXqMRBhra8qFQeD/p/Pvdnd1PV0jlcd+TwuD+VAu6PTWalyYIkAiNA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -174,12 +176,36 @@ namespace medGet.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DAR")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ElementsQuantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GenericElements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicineType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
+
+                    b.Property<string>("UsedFor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -216,21 +242,21 @@ namespace medGet.Migrations
                         new
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
-                            ConcurrencyStamp = "661e0eac-4168-489b-b736-cd0b2be8d5ff",
+                            ConcurrencyStamp = "3df44a10-e205-4c8d-9f36-a76425b14a17",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83",
-                            ConcurrencyStamp = "01fdd9de-0631-4b7b-92d2-cb33be3b1bfb",
+                            ConcurrencyStamp = "9ae14bfc-27a2-4756-8f29-c3a229f43ed1",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "25E46705-C687-4728-9A08-F81C0EAAFBE7",
-                            ConcurrencyStamp = "356e5e51-1baa-4fdd-9cf2-46d2d77d2a28",
+                            ConcurrencyStamp = "3cd7917d-68bc-49c5-99b8-3e5c9665c351",
                             Name = "Provider",
                             NormalizedName = "PROVIDER"
                         });

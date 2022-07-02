@@ -134,10 +134,5 @@ namespace medGet.Controllers
                 Map(m => m.DAR).Name("dar").ToString();
             }
         }
-        [HttpPost]
-        public IActionResult Product(Guid Id)
-        {
-            return View();
-        }
     }
 }

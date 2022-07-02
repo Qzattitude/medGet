@@ -111,13 +111,13 @@ namespace medGet.Migrations
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6b50969-1e24-405e-bf95-fb5b5d87e05a",
+                            ConcurrencyStamp = "27a5d840-91c8-4f52-b925-81120c0ad587",
                             Email = "mukit@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "mukit@gmail.com",
                             NormalizedUserName = "ADMIN@2022",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM8J92pudzo1ZFV3MptrygbYF/xwWkDkE7P40Yud/saBvgZQF3B5bKcHlE9cETJvTg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK1PJllEAmf+XXqMRBhra8qFQeD/p/Pvdnd1PV0jlcd+TwuD+VAu6PTWalyYIkAiNA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -240,21 +240,21 @@ namespace medGet.Migrations
                         new
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
-                            ConcurrencyStamp = "d2ccb3ae-9750-43c4-b4fc-f97528bc969a",
+                            ConcurrencyStamp = "3df44a10-e205-4c8d-9f36-a76425b14a17",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83",
-                            ConcurrencyStamp = "739c37e3-68fe-4839-91a9-54a8c7b4f611",
+                            ConcurrencyStamp = "9ae14bfc-27a2-4756-8f29-c3a229f43ed1",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "25E46705-C687-4728-9A08-F81C0EAAFBE7",
-                            ConcurrencyStamp = "a3dd5681-643a-4f94-babf-fadd70e8367b",
+                            ConcurrencyStamp = "3cd7917d-68bc-49c5-99b8-3e5c9665c351",
                             Name = "Provider",
                             NormalizedName = "PROVIDER"
                         });

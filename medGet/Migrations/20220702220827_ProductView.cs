@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace medGet.Migrations
 {
-    public partial class test : Migration
+    public partial class ProductView : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,10 +28,10 @@ namespace medGet.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contact = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     Location = table.Column<int>(type: "int", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: true),
+                    Age = table.Column<int>(type: "int", maxLength: 3, nullable: true),
                     Height = table.Column<float>(type: "real", nullable: true),
                     Weight = table.Column<float>(type: "real", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -71,6 +71,25 @@ namespace medGet.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicineDetails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PriceVariation",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    DAR = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GenericElements = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ElementsQuantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MedicineType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsedFor = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PriceVariation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,15 +203,15 @@ namespace medGet.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "25E46705-C687-4728-9A08-F81C0EAAFBE7", "d6098dde-2775-40aa-bf33-bd35d0c59864", "Provider", "PROVIDER" },
-                    { "49F70FB3-4F6E-4168-A912-A38658510A9F", "6765badd-f46e-4554-9d0e-dbd72e8d05be", "Admin", "ADMIN" },
-                    { "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83", "eaf5d662-546b-4c74-bca6-280a9b05ef0a", "User", "USER" }
+                    { "25E46705-C687-4728-9A08-F81C0EAAFBE7", "3cd7917d-68bc-49c5-99b8-3e5c9665c351", "Provider", "PROVIDER" },
+                    { "49F70FB3-4F6E-4168-A912-A38658510A9F", "3df44a10-e205-4c8d-9f36-a76425b14a17", "Admin", "ADMIN" },
+                    { "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83", "9ae14bfc-27a2-4756-8f29-c3a229f43ed1", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Contact", "Email", "EmailConfirmed", "Gender", "Height", "Location", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "Weight" },
-                values: new object[] { "49F70FB3-4F6E-4168-A912-A38658510A9F", 0, null, "ca8fcc34-789e-453e-9641-dc0205ba15e1", null, "mukit@gmail.com", true, null, null, null, false, null, "mukit@gmail.com", "ADMIN@2022", "AQAAAAEAACcQAAAAENPqDtHEiuCGP4uuWctzcYLsiS6b3dZbsxUeP1B+pMNs/J+Ft/x4NqevRiIg4xus1w==", null, false, "", false, "Admin@2022", null });
+                values: new object[] { "49F70FB3-4F6E-4168-A912-A38658510A9F", 0, null, "27a5d840-91c8-4f52-b925-81120c0ad587", null, "mukit@gmail.com", true, null, null, null, false, null, "mukit@gmail.com", "ADMIN@2022", "AQAAAAEAACcQAAAAEK1PJllEAmf+XXqMRBhra8qFQeD/p/Pvdnd1PV0jlcd+TwuD+VAu6PTWalyYIkAiNA==", null, false, "", false, "Admin@2022", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -258,6 +277,9 @@ namespace medGet.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicineDetails");
+
+            migrationBuilder.DropTable(
+                name: "PriceVariation");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
