@@ -8,19 +8,15 @@ namespace medGet.ViewModels
         [Required]
         public string Username { get; set; }
 
-        [Required]
         public string Email { get; set; }
 
-        [Required]
-        [MinLength(11, ErrorMessage = "Only 11 Digits are allowed")]
         public string Contact { get; set; }
 
-        [Required]
         public Gender Gender { get; set; }
 
-        [Required]
-        [MinLength(11, ErrorMessage = "Only 11 Digits are allowed")]
         public int Age { get; set; }
+
+        public Location Location { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

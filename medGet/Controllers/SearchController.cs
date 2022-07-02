@@ -4,6 +4,7 @@ using medGet.Controllers.DbController;
 using medGet.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace medGet.Controllers
@@ -17,25 +18,25 @@ namespace medGet.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            IEnumerable<MedicineDetails> objList = _db.MedicineDetails
-                .Take(10);
-            return View(objList);
+            IEnumerable<MedicineDetails> objList = await _db.MedicineDetails.ToListAsync();
+            //Change it with Paging
+            return View(objList.Take(10));
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Index(string text)
+        public async Task<IActionResult> Index(string text)
         {
             if (!String.IsNullOrEmpty(text))
             {
-                IEnumerable<MedicineDetails> objList = _db.MedicineDetails
+                IEnumerable<MedicineDetails> objList = await _db.MedicineDetails
                     .Where(p => (p.BrandName.Contains(text)
                             || p.CompanyName.Contains(text)
                             || p.DAR.Contains(text)
                             || p.Generic.Contains(text))
-                            && !p.Price.Contains("0"));
+                            && !p.Price.Contains("0")).ToListAsync();
                 return View(objList);
             }
             else
@@ -50,55 +51,60 @@ namespace medGet.Controllers
         }
 
         [HttpPost]
-        public IActionResult Insert(String Path)
+        public async Task<IActionResult> InsertAsync(String Path)
         {
-            //var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            //{
-            //    HeaderValidated = null,
-            //    MissingFieldFound = null
-            //};
+            var ExistingData = await _db.MedicineDetails.ToListAsync();
+            if ( ExistingData.Count == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HeaderValidated = null,
+                MissingFieldFound = null
+            };
 
-            //using (var streamReader = new StreamReader(Path))
-            //{
-            //    using var csvReader = new CsvReader(streamReader, config);
-            //    csvReader.Context.RegisterClassMap<MedicineDetailsMap>();
-            //    var records = csvReader.GetRecords<MedicineDetails>().ToList();
-            //    _db.MedicineDetails.AddRange(records);
-            //    _db.SaveChanges();
-            //}
+            using (var streamReader = new StreamReader(Path))
+            {
+                using var csvReader = new CsvReader(streamReader, config);
+                csvReader.Context.RegisterClassMap<MedicineDetailsMap>();
+                var records = csvReader.GetRecords<MedicineDetails>().ToList();
+                await _db.MedicineDetails.AddRangeAsync(records);
+                await _db.SaveChangesAsync();
+            }
 
-            
-            //IEnumerable<MedicineDetails> medicineDetails = _db.MedicineDetails.ToList();
-            //foreach (var element in medicineDetails)
-            //{
-            //    var PriceVariationCount = element.Price.Split(", ").Count();
-            //    if (PriceVariationCount == 1)
-            //    {
-            //        PriceVariation priceVariation = new ()
-            //        {
-            //            Id = Guid.NewGuid(),
-            //            DAR = element.DAR,
-            //            Price = float.Parse(element.Price)
-            //        };
-            //        _db.Add(priceVariation);
-                    
-            //    }
-            //    else
-            //    {
-            //        List<string> SegregatedPrice = element.Price.Split(", ").ToList();
-            //        foreach(var segreg in SegregatedPrice)
-            //        {
-            //            PriceVariation priceVariation = new ()
-            //            {
-            //                Id = Guid.NewGuid(),
-            //                DAR = element.DAR,
-            //                Price = float.Parse(segreg)
-            //            };
-            //            _db.Add(priceVariation);
-            //        }
-            //    }
-            //}
-            //_db.SaveChanges();
+
+            IEnumerable<MedicineDetails> medicineDetails = await _db.MedicineDetails.ToListAsync();
+            foreach (var element in medicineDetails)
+            {
+                var PriceVariationCount = element.Price.Split(", ").Count();
+                if (PriceVariationCount == 1)
+                {
+                    PriceVariation priceVariation = new()
+                    {
+                        Id = Guid.NewGuid(),
+                        DAR = element.DAR,
+                        Price = float.Parse(element.Price)
+                    };
+                    await _db.AddAsync(priceVariation);
+
+                }
+                else
+                {
+                    List<string> SegregatedPrice = element.Price.Split(", ").ToList();
+                    foreach (var segreg in SegregatedPrice)
+                    {
+                        PriceVariation priceVariation = new()
+                        {
+                            Id = Guid.NewGuid(),
+                            DAR = element.DAR,
+                            Price = float.Parse(segreg)
+                        };
+                        await _db.AddAsync(priceVariation);
+                    }
+                }
+            }
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
