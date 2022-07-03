@@ -1,7 +1,8 @@
 ﻿@model medGet.Models.Cart.OrderProduct
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Edit Amount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -24,7 +25,9 @@
             <input type="hidden" asp-for="OrderId" />
             <input type="hidden" asp-for="OrderStatus" />
             <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="CartId" />
             <input type="hidden" asp-for="ProductBrand" />
+            <input type="hidden" asp-for="TotalCostProduct" />
             <input type="hidden" asp-for="Price" />
             @*<div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>

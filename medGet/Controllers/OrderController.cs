@@ -86,6 +86,7 @@ namespace medGet.Controllers
                             ProductId = ProductDetails.Id,
                             ProductBrand = ProductDetails.BrandName,
                             Price = ProductDetails.Price,
+                            TotalCostProduct = ProductDetails.Price,
                             Qunatity = 1
                         };
                         await _context.AddAsync(NewOrder);
@@ -105,6 +106,7 @@ namespace medGet.Controllers
                             ProductId = ProductDetails.Id,
                             ProductBrand = ProductDetails.BrandName,
                             Price = ProductDetails.Price,
+                            TotalCostProduct = ProductDetails.Price,
                             Qunatity = 1
                         };
                         await _context.AddAsync(NewOrder);
@@ -202,7 +204,7 @@ namespace medGet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,UserName,OrderId,OrderStatus,ProductId,ProductBrand,Price,Qunatity")] OrderProduct orderProduct)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,UserName,OrderId,OrderStatus,ProductId,CartId,ProductBrand,TotalAmount,Price,Qunatity")] OrderProduct orderProduct)
         {
             if (id != orderProduct.Id)
             {
@@ -213,6 +215,7 @@ namespace medGet.Controllers
             {
                 try
                 {
+                    orderProduct.TotalCostProduct = orderProduct.Qunatity * orderProduct.Price;
                     _context.Update(orderProduct);
                     await _context.SaveChangesAsync();
                 }

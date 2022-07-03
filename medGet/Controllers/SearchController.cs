@@ -40,6 +40,7 @@ namespace medGet.Controllers
                             && !p.Price.Equals(0)).ToListAsync();
                 return View(model);
             }
+            else
             return RedirectToAction("Index","Search");
         }
 

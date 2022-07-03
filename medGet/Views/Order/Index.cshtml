@@ -1,17 +1,10 @@
 ﻿@model IEnumerable<medGet.Models.Cart.OrderProduct>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Cart Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
 @*<p>
     <a asp-action="Create">Create New</a>
 </p>*@
@@ -39,12 +32,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Qunatity)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCostProduct)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+                <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
@@ -67,6 +63,9 @@
                 @Html.DisplayFor(modelItem => item.Qunatity)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.TotalCostProduct)
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -75,5 +74,5 @@
 }
     </tbody>
 </table>
-</body>
-</html>
+    @Html.ActionLink("Place Order","Index", "Payment", null , 
+                  new { @class = "btn btn-primary text-white"})

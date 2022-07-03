@@ -14,6 +14,8 @@ namespace medGet.Models.Cart
         public string? ProductBrand { get; set; }
         public float Price { get; set; }
         public int Qunatity { get; set; }
+        public float TotalCostProduct { get; set; }
+        public DateTime DateTime { get; set; }
         public virtual IList<PriceVariation>? PriceVariation { get; set; }
     }
 }

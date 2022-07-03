@@ -9,7 +9,7 @@
         <h1 class="display-4 font-weight-bold">@Model.MedicineDetails.BrandName</h1>
 </header>
 <form class="d-flex" asp-controller="Order" asp-action="Add" method="post">
-  <div class="card border-success mb-3" style="max-width: auto;">
+  <div class="card border-success" style="max-width: auto;">
   <div class="card-header text-white" style="background-color: seagreen;">@Model.MedicineDetails.MedicineType</div>
       <div class="card-body">
           <h4 class="card-title">Unit Price   : @Model.MedicineDetails.Price Taka</h4>
@@ -17,7 +17,9 @@
           <h6 class="card-title">Used For: @Model.MedicineDetails.UsedFor</h6>
           <h6 hidden class="card-title">Used For: @Model.MedicineDetails.Id</h6>
           @*<button class="btn btn-primary" Type="Add To Cart">@Html.ActionLink("Add To Cart", "Add", "Order", new { Id = @Model.MedicineDetails.Id }, null)</button>*@
-                  <button type="Add To Cart" class="btn btn-primary text-white">@Html.ActionLink("Add To Cart","Add", "Order", new { Id = Model.MedicineDetails.Id })</button>
+                  @Html.ActionLink("Add To Cart","Add", "Order", 
+                  new { Id = Model.MedicineDetails.Id }, 
+                  new { @class = "btn btn-primary text-white"})
           <div class="table-responsive">
                         <table class="table border-1">
                             <thead>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using medGet.Controllers.DbController;
 
@@ -11,9 +12,10 @@ using medGet.Controllers.DbController;
 namespace medGet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220703142416_CartEdit")]
+    partial class CartEdit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,13 +113,13 @@ namespace medGet.Migrations
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "81f7510a-e918-4e2f-8e4e-23508543910a",
+                            ConcurrencyStamp = "ecdaef77-ed8f-48f8-a8d0-13c676bb922d",
                             Email = "mukit@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "mukit@gmail.com",
                             NormalizedUserName = "ADMIN@2022",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKgDWG/mfj9BfZHN1mrzdfojgpVLCFMpQsJu+iulqcPGeJxGw7h4HCBZTTypcYimCw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ/g/HvPQ7K06sCUW4tZBYutQvbGJhxXFdWXrLGif0oiifGIRM9C7u2DycenUHacgA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -133,9 +135,6 @@ namespace medGet.Migrations
 
                     b.Property<Guid>("CartId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
@@ -154,9 +153,6 @@ namespace medGet.Migrations
 
                     b.Property<int>("Qunatity")
                         .HasColumnType("int");
-
-                    b.Property<float>("TotalCostProduct")
-                        .HasColumnType("real");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -286,21 +282,21 @@ namespace medGet.Migrations
                         new
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
-                            ConcurrencyStamp = "9f749039-a778-48ca-bcf5-931adaea92e7",
+                            ConcurrencyStamp = "270bea98-8fa0-44d6-94b4-938e99231a7d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83",
-                            ConcurrencyStamp = "a25a23c5-0725-4145-a3d2-93b5fa8d6a01",
+                            ConcurrencyStamp = "6b21061e-426e-4ec1-ba1d-970d5d6be9ef",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "25E46705-C687-4728-9A08-F81C0EAAFBE7",
-                            ConcurrencyStamp = "37db2e79-c27e-4503-a16c-d5c5e23995f9",
+                            ConcurrencyStamp = "344f4959-a731-4063-af36-bba6a440cf6d",
                             Name = "Provider",
                             NormalizedName = "PROVIDER"
                         });

@@ -1,0 +1,36 @@
+﻿@using medGet.ViewModels
+@model PaymentViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Payment</h1>
+
+<form class="d-flex" asp-controller="Order" asp-action="Add" method="post" style="max-width: auto;"> 
+  <div class="card border-success" style="max-width: auto;">
+  <div class="card-header text-white" style="background-color: seagreen;">Date Time</div>
+      <div class="card-body">
+          <h4 class="card-title">Total Cost: @Model.TotalAmount (TK)</h4>
+          <div class="table-responsive">
+                        <table class="table border-1">
+                            <thead>
+                                <tr><th>Generic Elements</th><th>Quantity</th></tr>
+                            </thead>
+                            <tbody>
+                               @{
+                                foreach(var item in Model.Products)
+                                {
+                                  <tr><td>@item.ProductBrand</td><td>@item.Qunatity</td></tr>
+                                }
+                                }
+             
+                            </tbody>
+                        </table>
+           </div>
+           @Html.ActionLink("Confirm Payment","Submit", "Payment", null, 
+                  new { @class = "btn btn-primary text-white"})
+      </div>
+  </div>
+
+</form>
