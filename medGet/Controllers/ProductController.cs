@@ -1,6 +1,7 @@
 ﻿using medGet.Controllers.DbController;
 using medGet.Models;
 using medGet.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace medGet.Controllers
             Db = db;
         }
 
+        [AllowAnonymous]
         public IActionResult Index(ProductViewModel model)
         {
             return View(model);
@@ -22,6 +24,7 @@ namespace medGet.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(ProductViewModel model, Guid? Id)
         {
             if (ModelState.IsValid && !Id.Equals(null))

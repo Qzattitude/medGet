@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/04/2022 01:04:21" ReportInfo.Modified="07/04/2022 02:11:40" ReportInfo.CreatorVersion="2022.1.0.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqZEyJdPUMxrnGWGBfYplpoD7bs6EMcBgDKvD4UvNbo3qebyg29/0u/XpxOLfgfxY4DyQVoLHHeyU9UUo8edHZO1ajryR//5ixu7LiDVjptYKIBzvppFAeyiACiMXJRzGdIubaW9hDaJQ6cMf9uAryeRWwOXT3kGkux9WJurwtThQ4CZbXgSrTsjxJEP9I0i3U2WaEWS6AIEnKH8R4laXydw==">
+      <TableDataSource Name="OrderProduct" DataType="System.Int32" Enabled="true" TableName="OrderProduct">
+        <Column Name="Id" DataType="System.Guid"/>
+        <Column Name="UserName" DataType="System.String"/>
+        <Column Name="OrderId" DataType="System.Int32"/>
+        <Column Name="OrderStatus" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="ProductId" DataType="System.Guid"/>
+        <Column Name="ProductBrand" DataType="System.String"/>
+        <Column Name="Price" DataType="System.Single"/>
+        <Column Name="Qunatity" DataType="System.Int32"/>
+        <Column Name="CartId" DataType="System.Guid"/>
+        <Column Name="TotalCostProduct" DataType="System.Single"/>
+        <Column Name="DateTime" DataType="System.DateTime"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="793.8" Height="94.5" Fill.Color="DarkSeaGreen">
+      <TextObject Name="Text1" Left="236.25" Top="56.7" Width="321.3" Height="18.9" Text="[OrderProduct.UserName]" HorzAlign="Center" Font="Arial, 12pt, style=Bold" TextFill.Color="Snow"/>
+      <TextObject Name="Text15" Left="18.9" Top="56.7" Width="217.35" Height="18.9" Text="User:" HorzAlign="Right" Font="Arial, 12pt, style=Bold" TextFill.Color="Snow"/>
+      <TextObject Name="Text16" Top="9.45" Width="793.8" Height="28.35" Text="Purches Order Report" HorzAlign="Center" Font="Arial, 14pt, style=Bold" TextFill.Color="Snow"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="98.5" Width="793.8" Height="47.25">
+      <TextObject Name="Text4" Left="47.25" Width="151.2" Height="47.25" Border.Lines="All" Text="ProductBrand" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold, Underline" TextFill.Color="DarkSlateGray"/>
+      <TextObject Name="Text6" Left="198.45" Width="94.5" Height="47.25" Border.Lines="All" Text="Unit Price" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold, Underline" TextFill.Color="DarkSlateGray"/>
+      <TextObject Name="Text8" Left="292.95" Width="94.5" Height="47.25" Border.Lines="All" Text="Qunatity" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold, Underline" TextFill.Color="DarkSlateGray"/>
+      <TextObject Name="Text10" Left="387.45" Width="151.2" Height="47.25" Border.Lines="All" Text="Order Id" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold, Underline" TextFill.Color="DarkSlateGray"/>
+      <TextObject Name="Text12" Left="538.65" Width="94.5" Height="47.25" Border.Lines="All" Text="TotalCostProduct" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold, Underline" TextFill.Color="DarkSlateGray"/>
+      <TextObject Name="Text14" Left="633.15" Width="94.5" Height="47.25" Border.Lines="All" Text="DateTime" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold, Underline" TextFill.Color="DarkSlateGray"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="149.75" Width="793.8" Height="47.25" DataSource="OrderProduct">
+      <TextObject Name="Text3" Left="47.25" Width="151.2" Height="47.25" Border.Lines="All" CanGrow="true" Text="[OrderProduct.ProductBrand]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="198.45" Width="94.5" Height="47.25" Border.Lines="All" CanGrow="true" Text="[OrderProduct.Price]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text7" Left="292.95" Width="94.5" Height="47.25" Border.Lines="All" CanGrow="true" Text="[OrderProduct.Qunatity]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="387.45" Width="151.2" Height="47.25" Border.Lines="All" CanGrow="true" Text="[OrderProduct.CartId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text11" Left="538.65" Width="94.5" Height="47.25" Border.Lines="All" CanGrow="true" Text="[OrderProduct.TotalCostProduct]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text13" Left="633.15" Width="94.5" Height="47.25" Border.Lines="All" CanGrow="true" Text="[OrderProduct.DateTime]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="201" Width="793.8" Height="75.6" Fill.Color="DarkSeaGreen">
+      <TextObject Name="Text17" Top="28.35" Width="793.8" Height="28.35" Text="Med Get Report" HorzAlign="Center" Font="Arial, 11pt, style=Bold" TextFill.Color="Snow"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

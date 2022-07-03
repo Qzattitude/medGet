@@ -19,11 +19,12 @@ namespace medGet.Controllers
             _db = db;
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             SearchViewModel model = new SearchViewModel();
-            model.MedicineDetails = await _db.PriceVariation.Take(10).ToListAsync();
-            //Change it with Paging
+            model.MedicineDetails = await _db.PriceVariation
+                .Where(p=> !p.Price.Equals(0)).Take(10).ToListAsync();
             return View(model);
         }
 
@@ -44,14 +45,14 @@ namespace medGet.Controllers
             return RedirectToAction("Index","Search");
         }
 
-
-
+        [Authorize(Roles ="Admin")]
         public IActionResult Insert()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Insert(String Path)
         {
             var ExistingData = await _db.MedicineDetails.ToListAsync();

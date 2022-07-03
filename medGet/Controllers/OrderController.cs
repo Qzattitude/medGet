@@ -10,6 +10,7 @@ using medGet.Models.Cart;
 using medGet.Models;
 using Microsoft.AspNetCore.Identity;
 using medGet.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace medGet.Controllers
 {
@@ -30,6 +31,7 @@ namespace medGet.Controllers
         }
 
         // GET: Order
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
               return _context.OrderProduct != null ? 
@@ -55,9 +57,10 @@ namespace medGet.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Add(Guid? Id)
         {
-            var currentUser = "Mukit@2022";
+            var currentUser = UserManager.GetUserName(HttpContext.User);
                 //UserManager.GetUserName(HttpContext.User);
             if (currentUser != null)
             {
@@ -149,6 +152,7 @@ namespace medGet.Controllers
         //}
         #endregion
         // GET: Order/Edit/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.OrderProduct == null)
@@ -205,6 +209,7 @@ namespace medGet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,UserName,OrderId,OrderStatus,ProductId,CartId,ProductBrand,TotalAmount,Price,Qunatity")] OrderProduct orderProduct)
         {
             if (id != orderProduct.Id)
@@ -237,6 +242,7 @@ namespace medGet.Controllers
         }
 
         // GET: Order/Delete/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.OrderProduct == null)
@@ -257,6 +263,7 @@ namespace medGet.Controllers
         // POST: Order/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.OrderProduct == null)
@@ -311,6 +318,7 @@ namespace medGet.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Previous(PreviousOrderViewModel model)
         {
             model.OrderProduct = await _context.OrderProduct

@@ -1,6 +1,7 @@
 ﻿using medGet.Controllers.DbController;
 using medGet.Models;
 using medGet.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,15 +19,19 @@ namespace medGet.Controllers
             SignInManager = signInManager;
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View("Register");
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
+                
                 var applicationUser = new ApplicationUser()
                 {
                     UserName = model.Username,
@@ -36,7 +41,6 @@ namespace medGet.Controllers
                     Age = model.Age,
                     Location = model.Location
                 };
-
                 var result = await UserManager.CreateAsync(applicationUser, model.Password);
                 var result2 = await UserManager.AddToRoleAsync(applicationUser, "User");
 
@@ -49,12 +53,14 @@ namespace medGet.Controllers
             return View("Register", "Account");
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -66,8 +72,15 @@ namespace medGet.Controllers
                     return View("Index", "home");
                 }
             }
-
             return View("Login","Account");
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Logout()
+        {
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

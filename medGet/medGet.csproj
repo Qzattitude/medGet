@@ -24,16 +24,30 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="wwwroot\dataset\dgda.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\Reports\PaymentReport.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Reports\" />
+    <Folder Include="wwwroot\Reports\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Reports\AllReport.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PaymentReport.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
