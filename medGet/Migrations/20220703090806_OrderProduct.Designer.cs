@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using medGet.Controllers.DbController;
 
@@ -11,9 +12,10 @@ using medGet.Controllers.DbController;
 namespace medGet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220703090806_OrderProduct")]
+    partial class OrderProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,13 +113,13 @@ namespace medGet.Migrations
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21081643-a1fb-4b2f-b886-c02288f62771",
+                            ConcurrencyStamp = "9d827460-6ae2-4667-ba56-02808dc4141a",
                             Email = "mukit@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "mukit@gmail.com",
                             NormalizedUserName = "ADMIN@2022",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC8+ck/JZYjMlqY8gVgKycas1RyWzkD+HZkMKpT2u3FoaypyrZ/H6C1hk7BMuyYgog==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI57XZv2A++lLciloCRpEsh3JC0y37G2K7gDwbui8SRhKHLv006BqT9hb1E8b4Bsag==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -131,10 +133,7 @@ namespace medGet.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CartId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<bool>("OrderStatus")
@@ -144,6 +143,7 @@ namespace medGet.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("ProductBrand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
@@ -153,6 +153,7 @@ namespace medGet.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -280,21 +281,21 @@ namespace medGet.Migrations
                         new
                         {
                             Id = "49F70FB3-4F6E-4168-A912-A38658510A9F",
-                            ConcurrencyStamp = "97e0be73-74d8-496f-8d0f-ac9800236a76",
+                            ConcurrencyStamp = "0d22a007-5a31-46f8-9e35-de2a5b66347a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4DABBE26-AD0E-4EC7-AA6F-A615E951BD83",
-                            ConcurrencyStamp = "6f0a6923-4261-462c-bcec-8c7fcbbd4b55",
+                            ConcurrencyStamp = "29b5752d-99b1-48a3-a69e-4db971bc71b1",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "25E46705-C687-4728-9A08-F81C0EAAFBE7",
-                            ConcurrencyStamp = "b24f3a95-3953-40e4-aafa-5b870f973ded",
+                            ConcurrencyStamp = "0cb751b5-a398-4c91-a4b9-560f667f103b",
                             Name = "Provider",
                             NormalizedName = "PROVIDER"
                         });

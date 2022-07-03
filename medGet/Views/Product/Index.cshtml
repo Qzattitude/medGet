@@ -8,31 +8,34 @@
 <header class="text-center mb-5">
         <h1 class="display-4 font-weight-bold">@Model.MedicineDetails.BrandName</h1>
 </header>
-<form>
-  <div class="card border-success mb-3" style="max-width: max-content;">
-  <div class="card-header text-white" style="background-color: seagreen;">BrandName</div>
-  <div class="card-body">
-  <h4 class="card-title">Unit Price   : @Model.MedicineDetails.Price Taka</h4>
-  <h6 class="card-title">Company Name : @Model.MedicineDetails.CompanyName</h6>
-  <h6 class="card-title">Medicine Type: @Model.MedicineDetails.MedicineType</h6>
-  <h6 class="card-title">Suggested For: @Model.MedicineDetails.UsedFor</h6>
-  </div>
-  </div>
-</form>
-<div class="table-responsive">
-        <table class="table border-1">
-            <thead>
-                <tr><th>Generic Elements</th><th>Quantity</th></tr>
-            </thead>
-            <tbody>
-               @{
-                foreach(KeyValuePair<string, string> valuePair in @Model.Generic_Quantity)
-                {
-                  <tr><td>@valuePair.Key</td><td>@valuePair.Value</td></tr>
-                }
-                }
+<form class="d-flex" asp-controller="Order" asp-action="Add" method="post">
+  <div class="card border-success mb-3" style="max-width: auto;">
+  <div class="card-header text-white" style="background-color: seagreen;">@Model.MedicineDetails.MedicineType</div>
+      <div class="card-body">
+          <h4 class="card-title">Unit Price   : @Model.MedicineDetails.Price Taka</h4>
+          <h6 class="card-title">Company : @Model.MedicineDetails.CompanyName</h6>
+          <h6 class="card-title">Used For: @Model.MedicineDetails.UsedFor</h6>
+          <h6 hidden class="card-title">Used For: @Model.MedicineDetails.Id</h6>
+          @*<button class="btn btn-primary" Type="Add To Cart">@Html.ActionLink("Add To Cart", "Add", "Order", new { Id = @Model.MedicineDetails.Id }, null)</button>*@
+                  <button type="Add To Cart" class="btn btn-primary text-white">@Html.ActionLink("Add To Cart","Add", "Order", new { Id = Model.MedicineDetails.Id })</button>
+          <div class="table-responsive">
+                        <table class="table border-1">
+                            <thead>
+                                <tr><th>Generic Elements</th><th>Quantity</th></tr>
+                            </thead>
+                            <tbody>
+                               @{
+                                foreach(KeyValuePair<string, string> valuePair in @Model.Generic_Quantity)
+                                {
+                                  <tr><td>@valuePair.Key</td><td>@valuePair.Value</td></tr>
+                                }
+                                }
              
-            </tbody>
-        </table>
-    </div>
+                            </tbody>
+                        </table>
+                  </div>
 
+      </div>
+  </div>
+
+</form>

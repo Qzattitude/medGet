@@ -1,4 +1,5 @@
 ﻿using medGet.Models;
+using medGet.Models.Cart;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ namespace medGet.Controllers.DbController
         }
         public DbSet<MedicineDetails> MedicineDetails { get; set; }
         public DbSet<PriceVariation> PriceVariation { get; set; }   
-        //public DbSet<GenericModel> GenericModel { get; set; }
+        public DbSet<OrderProduct> OrderProduct { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
