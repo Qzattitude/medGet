@@ -1,0 +1,57 @@
+﻿@using medGet.ViewModels
+@model PreviousOrderViewModel
+@{
+    ViewData["Title"] = "Previous";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Previous</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+               Order Id
+            </th>
+            <th>
+               Medicine Name
+            </th>
+            <th>
+               Unit Price
+            </th>
+            <th>
+               Medicine Quantity
+            </th>
+            <th>
+               Order Cost(Price * Qunatity)
+            </th>
+            <th>
+               Order Date & Time
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderProduct) {
+                <tr>
+            <td>
+                @item.CartId
+            </td>
+            <td>
+                @item.ProductBrand
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.Qunatity
+            </td>
+            <td>
+                @item.TotalCostProduct
+            </td>
+            <td>
+                @item.DateTime
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

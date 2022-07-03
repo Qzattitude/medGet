@@ -9,6 +9,7 @@ using medGet.Controllers.DbController;
 using medGet.Models.Cart;
 using medGet.Models;
 using Microsoft.AspNetCore.Identity;
+using medGet.ViewModels;
 
 namespace medGet.Controllers
 {
@@ -307,6 +308,15 @@ namespace medGet.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(orderProduct);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Previous(PreviousOrderViewModel model)
+        {
+            model.OrderProduct = await _context.OrderProduct
+                .Where(p=>p.OrderStatus.Equals(true))
+                .OrderByDescending(p=>p.DateTime).ToListAsync();
+            return View(model);
         }
     }
 }
