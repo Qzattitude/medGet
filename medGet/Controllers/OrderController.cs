@@ -317,13 +317,47 @@ namespace medGet.Controllers
             return View(orderProduct);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> Previous(PreviousOrderViewModel model)
         {
+            var currentuser = UserManager.GetUserName(HttpContext.User);
+            var ExistanceOfPreviousOrder = await _context.OrderProduct
+                .Where(p => p.OrderStatus.Equals(true) 
+                && p.UserName.Equals(currentuser))
+                .OrderByDescending(p => p.DateTime).CountAsync();
+            if (ExistanceOfPreviousOrder != 0)
+            {
+                model.OrderProduct = await _context.OrderProduct
+                .Where(p => p.OrderStatus.Equals(true) && p.UserName.Equals(currentuser))
+                .OrderByDescending(p => p.DateTime).ToListAsync();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Order");
+            }
+            
+        }
+        public IActionResult AdminSale()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AdminSale(AdminSaleViewModel model)
+        {
+
             model.OrderProduct = await _context.OrderProduct
-                .Where(p=>p.OrderStatus.Equals(true))
-                .OrderByDescending(p=>p.DateTime).ToListAsync();
+                .Where(p => p.OrderStatus.Equals(true))
+                .OrderByDescending(p => p.DateTime).ThenBy(q=>q.CartId).ThenBy(r=>r.UserName).ToListAsync();
+
+            var pricelist = await _context.OrderProduct.Select(q => q.TotalCostProduct).ToListAsync();
+            double amount = 0.0d;
+            foreach (var cost in pricelist)
+            {
+                amount += cost;
+            }
+            model.TotalEarning = Math.Round(amount, 2);
             return View(model);
         }
     }

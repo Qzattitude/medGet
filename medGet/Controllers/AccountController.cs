@@ -69,10 +69,10 @@ namespace medGet.Controllers
                     model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return View("Index", "home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            return View("Login","Account");
+            return RedirectToAction("Login","Account");
         }
 
         [HttpPost]

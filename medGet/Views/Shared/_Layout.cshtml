@@ -32,7 +32,7 @@
                     </ul>
                   @*  <partial name="_LoginPartial"/>*@
                     <ul class="navbar-nav ml-auto">
-                        @if(signInManager.IsSignedIn(User))
+                        @if(signInManager.IsSignedIn(User) && User.IsInRole("User"))
                         {
                             <li class="nav-item">
                                 <form method="post" asp-controller="Order" asp-action="Index">
@@ -58,7 +58,26 @@
                                     </button>
                                 </form>
                             </li>
-                        }else
+                        }else if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-controller="Order" asp-action="AdminSale">
+                                    <button type="submit" style="width:auto"
+                                            class="btn btn-primary py-0">
+                                        Total Sale
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" asp-controller="account" asp-action="logout">
+                                    <button type="submit" style="width:auto"
+                                            class="btn btn-warning py-0">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="account" asp-action="register">
