@@ -1,3 +1,4 @@
+using FastReport.Data;
 using medGet.Controllers.DbController;
 using medGet.Models;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
+
+FastReport.Utils.RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
 //builder.Services.AddWkhtmltopdf();
 var app = builder.Build();
 
@@ -31,6 +34,7 @@ app.UseStaticFiles();
 
 //app.UseAuthentication();
 //app.UseAuthorization();
+app.UseFastReport();
 
 app.UseRouting();
 //app.MapRazorPages(); 
