@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/04/2022 09:25:09" ReportInfo.Modified="07/04/2022 09:50:37" ReportInfo.CreatorVersion="2022.1.0.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqZEyJdPUMxrnGWGBfYplpoD7bs6EMcBgDKvD4UvNbo3qebyg29/0u/XpxOLfgfxY4DyQVoLHHeyU9UUo8edHZO1ajryR//5ixu7LiDVjptYKIBzvppFAeyiACiMXJRzGdIubaW9hDaJQ6cMf9uAryeRWwOXT3kGkux9WJurwtThQ4CZbXgSrTsjxJEP9I0i3UNh160ck2HL1Yh+vEh4dl3g==">
+      <TableDataSource Name="OrderProduct" DataType="System.Int32" Enabled="true" TableName="OrderProduct" SelectCommand="exec GetCartByUserNameAndOrderSatus @UserName, @OrderStatus">
+        <Column Name="Column" DataType="System.Int32" Calculated="true" Expression=""/>
+        <Column Name="Id" DataType="System.Guid"/>
+        <Column Name="UserName" DataType="System.String"/>
+        <Column Name="OrderId" DataType="System.Int32"/>
+        <Column Name="OrderStatus" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="ProductId" DataType="System.Guid"/>
+        <Column Name="ProductBrand" DataType="System.String"/>
+        <Column Name="Price" DataType="System.Single"/>
+        <Column Name="Qunatity" DataType="System.Int32"/>
+        <Column Name="CartId" DataType="System.Guid"/>
+        <Column Name="TotalCostProduct" DataType="System.Single"/>
+        <Column Name="DateTime" DataType="System.DateTime"/>
+        <CommandParameter Name="UserName" DataType="12" Expression="[UserName]"/>
+        <CommandParameter Name="OrderStatus" DataType="2" Expression="[OrderStatus]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="UserName" DataType="System.String"/>
+    <Parameter Name="OrderStatus" DataType="System.String"/>
+    <Parameter Name="CONN" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Left="9.45" Top="18.9" Width="94.5" Height="18.9" Text="[OrderProduct.UserName]" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35">
+      <TextObject Name="Text3" Left="132.3" Width="94.5" Height="18.9" Text="ProductId" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="9.45" Width="94.5" Height="18.9" Text="ProductBrand" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="245.7" Width="94.5" Height="18.9" Text="Price" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="359.1" Width="94.5" Height="18.9" Text="Qunatity" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="481.95" Width="94.5" Height="18.9" Text="TotalCostProduct" Font="Arial, 10pt"/>
+      <TextObject Name="Text13" Left="595.35" Width="94.5" Height="18.9" Text="DateTime" Font="Arial, 10pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="75.6" DataSource="OrderProduct">
+      <TextObject Name="Text2" Left="132.3" Width="94.5" Height="18.9" Text="[OrderProduct.ProductId]" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="9.45" Width="94.5" Height="18.9" Text="[OrderProduct.ProductBrand]" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="245.7" Width="94.5" Height="18.9" Text="[OrderProduct.Price]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text8" Left="359.1" Width="94.5" Height="18.9" Text="[OrderProduct.Qunatity]" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="481.95" Width="94.5" Height="18.9" Text="[OrderProduct.TotalCostProduct]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text12" Left="595.35" Width="94.5" Height="18.9" Text="[OrderProduct.DateTime]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

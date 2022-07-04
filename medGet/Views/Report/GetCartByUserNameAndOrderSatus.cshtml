@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Please Download</h1>
-@await Model.Render();
+<h1>Please Download Before Payment</h1>
 @Html.ActionLink("Pay Now","Submit", "Payment", null, 
                   new { @class = "btn btn-primary text-white"})
+<br>
+@await Model.Render();
+
