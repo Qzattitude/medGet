@@ -1,4 +1,5 @@
 ﻿using FastReport.Data;
+using FastReport.Utils;
 using FastReport.Web;
 using medGet.Controllers.DbController;
 using medGet.Models;
@@ -10,6 +11,7 @@ namespace medGet.Controllers
 {
     public class ReportController : Controller
     {
+        private static readonly string ReportsFolder = FindReportsFolder();
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly AppDbContext _db;
         private readonly IConfiguration _configuration;
@@ -28,6 +30,28 @@ namespace medGet.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        private static string FindReportsFolder()
+        {
+            string fReportsFolder = "";
+            string thisFolder = Config.ApplicationFolder;
+
+            for (int i = 0; i < 6; i++)
+            {
+                string dir = Path.Combine(thisFolder, "Reports");
+                if (Directory.Exists(dir))
+                {
+                    string rep_dir = Path.GetFullPath(dir);
+                    if (System.IO.File.Exists(Path.Combine(rep_dir, "reports.xml")))
+                    {
+                        fReportsFolder = rep_dir;
+                        break;
+                    }
+                }
+                thisFolder = Path.Combine(thisFolder, @"..");
+            }
+            return fReportsFolder;
+        }
         public IActionResult Index()
         {
             return View();
@@ -45,8 +69,8 @@ namespace medGet.Controllers
             }
 
             WebReport web = new WebReport();
-            var path = $"{this._webHostEnvironment.WebRootPath}\\Reports\\OrderReport.frx";
-            web.Report.Load(path);
+            //var path = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\Reports\\OrderReport.frx";
+            web.Report.Load(Path.Combine(ReportsFolder, $"OrderReport.frx"));
             var mssqlDataConnection = new MsSqlDataConnection();
             mssqlDataConnection.ConnectionString = _configuration.GetConnectionString("DefaultConnection");
             var Conn = mssqlDataConnection.ConnectionString;
@@ -56,5 +80,28 @@ namespace medGet.Controllers
             web.Report.SetParameterValue("TotalCost", Math.Round(amount, 2));
             return View(web);
         }
+
+        //private WebReport GenerateReportViewModel<T>(IEnumerable<T> reportableDataSet)
+        //{
+        //    var model = new WebReport();
+
+        //    var reportToLoad = model.ReportName;
+        //    model.Report.Load(Path.Combine(ReportsFolder, $"{reportToLoad}.frx"));
+        //    model.Report.RegisterData(reportableDataSet, $"{model.ReportName}s");
+        //    model.Report.GetDataSource($"{model.ReportName}s").Enabled = true;
+        //    model.Report.Prepare();
+        //    return model;
+        //}
+        //private WebReport GenerateReportViewModel<T>(IEnumerable<T> reportableDataSet, string templateName)
+        //{
+        //    var model = new WebReport();
+
+        //    var reportToLoad = templateName;
+        //    model.Report.Load(Path.Combine(ReportsFolder, $"{reportToLoad}.frx"));
+        //    model.Report.RegisterData(reportableDataSet, $"{model.ReportName}s");
+        //    model.Report.GetDataSource($"{model.ReportName}s").Enabled = true;
+        //    model.Report.Prepare();
+        //    return model;
+        //}
     }
 }

@@ -34,8 +34,10 @@ namespace medGet.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
-              return _context.OrderProduct != null ? 
-                          View(await _context.OrderProduct.Where(p => p.OrderStatus.Equals(false)).ToListAsync()) :
+            var currentUser = UserManager.GetUserName(HttpContext.User);
+            return _context.OrderProduct != null ? 
+                          View(await _context.OrderProduct
+                          .Where(p => p.OrderStatus.Equals(false) && p.UserName.Equals(currentUser)).ToListAsync()) :
                           Problem("Entity set 'AppDbContext.OrderProduct'  is null.");
         }
 
@@ -66,7 +68,7 @@ namespace medGet.Controllers
             {
                 //checks for existing order
                 var ExistingOrder = await _context.OrderProduct
-                    .Where(p => (p.ProductId.Equals(Id) && p.OrderStatus.Equals(false)))
+                    .Where(p => (p.ProductId.Equals(Id) && p.OrderStatus.Equals(false) && p.UserName.Equals(currentUser)))
                     .Select(q => q.Id).FirstOrDefaultAsync();
                 //if empty, then add new product to cart
                 if (ExistingOrder.Equals(Guid.Empty))
